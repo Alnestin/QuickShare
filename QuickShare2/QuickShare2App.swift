@@ -8,10 +8,12 @@
 import SwiftUI
 
 @main
-struct QuickShare2App: App {
+struct QuickShare2: App {
     var body: some Scene {
         WindowGroup {
-            HomeView()
+            NavigationView {
+                HomeView(buttons: ThruButton.buttons)
+            }
         }
     }
 }
