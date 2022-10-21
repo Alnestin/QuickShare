@@ -14,7 +14,7 @@ struct AlbumsView: View {
         List {
             Section(header: Text("Albums")) {
                 ForEach(albums) { album in
-                    NavigationLink(destination: Text(album.title)) {
+                    NavigationLink(destination: PhotosView()) {
                         AlbumButtonView(album: album)
                     }
                 }

@@ -13,6 +13,7 @@
 		E110248C2901BB4500CBBA90 /* QuickShare2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E110248B2901BB4500CBBA90 /* QuickShare2Tests.swift */; };
 		E11024962901BB4500CBBA90 /* QuickShare2UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11024952901BB4500CBBA90 /* QuickShare2UITests.swift */; };
 		E11024982901BB4500CBBA90 /* QuickShare2UITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11024972901BB4500CBBA90 /* QuickShare2UITestsLaunchTests.swift */; };
+		E14E63C0290312C600A3DAF8 /* PhotosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14E63BF290312C600A3DAF8 /* PhotosView.swift */; };
 		FC5C46C32901DF46001886C0 /* ThruButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5C46C22901DF46001886C0 /* ThruButton.swift */; };
 		FC5C46C52901E6E3001886C0 /* ThruHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5C46C42901E6E3001886C0 /* ThruHomeView.swift */; };
 		FC5C46C72901E87A001886C0 /* ThruButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5C46C62901E87A001886C0 /* ThruButtonView.swift */; };
@@ -48,6 +49,7 @@
 		E11024912901BB4500CBBA90 /* QuickShare2UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QuickShare2UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E11024952901BB4500CBBA90 /* QuickShare2UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickShare2UITests.swift; sourceTree = "<group>"; };
 		E11024972901BB4500CBBA90 /* QuickShare2UITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickShare2UITestsLaunchTests.swift; sourceTree = "<group>"; };
+		E14E63BF290312C600A3DAF8 /* PhotosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosView.swift; sourceTree = "<group>"; };
 		FC5C46C22901DF46001886C0 /* ThruButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThruButton.swift; sourceTree = "<group>"; };
 		FC5C46C42901E6E3001886C0 /* ThruHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThruHomeView.swift; sourceTree = "<group>"; };
 		FC5C46C62901E87A001886C0 /* ThruButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThruButtonView.swift; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 			children = (
 				E110247A2901BB4200CBBA90 /* QuickShare2App.swift */,
 				FC5C46CE2901F7DC001886C0 /* ThruAlbums.swift */,
+				E14E63BF290312C600A3DAF8 /* PhotosView.swift */,
 				FC5C46D02901FA94001886C0 /* ThruAlbumButtonView.swift */,
 				FC5C46CA2901EC1D001886C0 /* ThruAlbumsView.swift */,
 				E110247E2901BB4400CBBA90 /* Assets.xcassets */,
@@ -275,6 +278,7 @@
 				FC5C46C32901DF46001886C0 /* ThruButton.swift in Sources */,
 				FC5C46C72901E87A001886C0 /* ThruButtonView.swift in Sources */,
 				FC5C46D12901FA94001886C0 /* ThruAlbumButtonView.swift in Sources */,
+				E14E63C0290312C600A3DAF8 /* PhotosView.swift in Sources */,
 				FC5C46CF2901F7DC001886C0 /* ThruAlbums.swift in Sources */,
 				FC5C46C52901E6E3001886C0 /* ThruHomeView.swift in Sources */,
 				E110247B2901BB4200CBBA90 /* QuickShare2App.swift in Sources */,
