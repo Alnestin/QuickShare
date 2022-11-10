@@ -12,7 +12,8 @@ struct QuickShare2: App {
     var body: some Scene {
         WindowGroup {
             NavigationView {
-                HomeView(buttons: ThruButton.buttons)
+//                HomeView(buttons: ThruButton.buttons)
+                ContentView()
             }
         }
     }
