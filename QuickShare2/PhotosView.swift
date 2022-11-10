@@ -13,6 +13,10 @@ struct PhotosView: View {
     @State private var photo = 1
     @State private var isPresentingEditView = false
     
+    @State private var sourceType: UIImagePickerController.SourceType = .photoLibrary
+    @State private var selectedImage: UIImage?
+    @State private var isImagePickerDisplay = false
+    
     var body: some View {
         VStack{
             GeometryReader{ proxy in
@@ -29,7 +33,18 @@ struct PhotosView: View {
                 .frame(width: proxy.size.width, height: proxy.size.height/1.3)
             }
             
-            Button{} label: {
+//            Button{} label: {
+//                Image(systemName: "plus")
+//                    .frame(width: 40, height: 40)
+//                    .background(Color.black)
+//                    .clipShape(Circle())
+//                    .foregroundColor(.white)
+//            }
+            
+            Button {
+                self.sourceType = .photoLibrary
+                self.isImagePickerDisplay.toggle()
+            } label: {
                 Image(systemName: "plus")
                     .frame(width: 40, height: 40)
                     .background(Color.black)
@@ -62,6 +77,9 @@ struct PhotosView: View {
                         }
                     }
             }
+        }
+        .sheet(isPresented: self.$isImagePickerDisplay) {
+            ImagePickerView(selectedImage: self.$selectedImage, sourceType: self.sourceType)
         }
     }
 }
