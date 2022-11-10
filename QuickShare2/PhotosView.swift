@@ -45,18 +45,18 @@ struct PhotosView: View {
                 self.isImagePickerDisplay.toggle()
             } label: {
                 Image(systemName: "plus")
-                    .frame(width: 50, height: 50)
-                    .background(Color.black)
-                    .clipShape(Circle())
-                    .foregroundColor(.white)
+                    .frame(width: 30, height: 40)
+                    .foregroundColor(Color.black)
             }.onChange(of: selectedImage, perform: { _ in
                 data = album.data
                 data.photos.append(Image(uiImage: selectedImage!))
                 album.update(from: data)
             })
+            .buttonStyle(.bordered)
+            .buttonBorderShape(.capsule)
+
         }
         .navigationTitle(album.symbol + " " + album.title)
-        .background(Color.white)
         .toolbar {
             Button("Edit") {
                 isPresentingEditView = true

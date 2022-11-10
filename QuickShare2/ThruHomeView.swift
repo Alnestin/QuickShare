@@ -22,8 +22,8 @@ struct HomeView: View {
             }
         }
         .navigationTitle("ThruTime")
-        .navigationBarTitleDisplayMode(.large)
-//        .scrollDisabled(true)
+        //        .navigationBarTitleDisplayMode(.large)
+        //        .scrollDisabled(true)
         .toolbar {
             Button(action: {}) {
                 Image(systemName: "person")

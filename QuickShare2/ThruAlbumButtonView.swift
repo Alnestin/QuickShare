@@ -11,8 +11,8 @@ struct AlbumButtonView: View {
     let album: ThruAlbum
     var body: some View {
         HStack {
-            Text(album.symbol)
-            Text(album.title).font(.headline)
+            Text(album.symbol).font(.largeTitle)
+            Text(album.title).font(.title2)
         }.font(.headline)
         .padding()
     }

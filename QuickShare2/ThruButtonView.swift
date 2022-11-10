@@ -12,7 +12,8 @@ struct ButtonView: View {
     var body: some View {
         HStack {
             Label("", systemImage: button.symbol)
-            Text(button.title).font(.headline)
+                .font(.title)
+            Text(button.title).font(.title2)
         }.font(.headline)
         .padding()
     }
