@@ -14,7 +14,6 @@
 		E11024962901BB4500CBBA90 /* QuickShare2UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11024952901BB4500CBBA90 /* QuickShare2UITests.swift */; };
 		E11024982901BB4500CBBA90 /* QuickShare2UITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11024972901BB4500CBBA90 /* QuickShare2UITestsLaunchTests.swift */; };
 		E128D963291CC7DC002CF414 /* ImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E128D962291CC7DC002CF414 /* ImagePickerView.swift */; };
-		E128D967291CC935002CF414 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E128D966291CC935002CF414 /* ContentView.swift */; };
 		E14E63C0290312C600A3DAF8 /* PhotosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14E63BF290312C600A3DAF8 /* PhotosView.swift */; };
 		FC5C46C32901DF46001886C0 /* ThruButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5C46C22901DF46001886C0 /* ThruButton.swift */; };
 		FC5C46C52901E6E3001886C0 /* ThruHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5C46C42901E6E3001886C0 /* ThruHomeView.swift */; };
@@ -53,7 +52,6 @@
 		E11024952901BB4500CBBA90 /* QuickShare2UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickShare2UITests.swift; sourceTree = "<group>"; };
 		E11024972901BB4500CBBA90 /* QuickShare2UITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickShare2UITestsLaunchTests.swift; sourceTree = "<group>"; };
 		E128D962291CC7DC002CF414 /* ImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerView.swift; sourceTree = "<group>"; };
-		E128D966291CC935002CF414 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		E14E63BF290312C600A3DAF8 /* PhotosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosView.swift; sourceTree = "<group>"; };
 		FC5C46C22901DF46001886C0 /* ThruButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThruButton.swift; sourceTree = "<group>"; };
 		FC5C46C42901E6E3001886C0 /* ThruHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThruHomeView.swift; sourceTree = "<group>"; };
@@ -114,7 +112,6 @@
 			children = (
 				E110247A2901BB4200CBBA90 /* QuickShare2App.swift */,
 				E128D962291CC7DC002CF414 /* ImagePickerView.swift */,
-				E128D966291CC935002CF414 /* ContentView.swift */,
 				FC5C46CE2901F7DC001886C0 /* ThruAlbums.swift */,
 				FCAFA5B9291AF03000D8FB56 /* EditView.swift */,
 				E14E63BF290312C600A3DAF8 /* PhotosView.swift */,
@@ -285,7 +282,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				FC5C46C32901DF46001886C0 /* ThruButton.swift in Sources */,
-				E128D967291CC935002CF414 /* ContentView.swift in Sources */,
 				FC5C46C72901E87A001886C0 /* ThruButtonView.swift in Sources */,
 				FC5C46D12901FA94001886C0 /* ThruAlbumButtonView.swift in Sources */,
 				E14E63C0290312C600A3DAF8 /* PhotosView.swift in Sources */,

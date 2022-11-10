@@ -13,7 +13,6 @@ struct QuickShare2: App {
         WindowGroup {
             NavigationView {
                 HomeView(buttons: ThruButton.buttons)
-//                ContentView()
             }
         }
     }

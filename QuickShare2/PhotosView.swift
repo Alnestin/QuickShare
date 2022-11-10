@@ -14,6 +14,7 @@ struct PhotosView: View {
     @State private var photo = 0
     @State private var isPresentingEditView = false
     
+    // Things needed to use camera roll or photo library
     @State private var sourceType: UIImagePickerController.SourceType = .photoLibrary
     @State private var selectedImage: UIImage?
     @State private var isImagePickerDisplay = false
@@ -34,14 +35,7 @@ struct PhotosView: View {
                 .frame(width: proxy.size.width, height: proxy.size.height/1.3)
             }
             
-//            Button{} label: {
-//                Image(systemName: "plus")
-//                    .frame(width: 40, height: 40)
-//                    .background(Color.black)
-//                    .clipShape(Circle())
-//                    .foregroundColor(.white)
-//            }
-            
+            // TODO: Add another button to use sourceType = .camera?
             Button() {
                 self.sourceType = .photoLibrary
                 self.isImagePickerDisplay.toggle()
