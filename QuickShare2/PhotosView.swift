@@ -36,22 +36,25 @@ struct PhotosView: View {
                 .indexViewStyle(.page(backgroundDisplayMode: .automatic))
                 .frame(width: proxy.size.width, height: proxy.size.height)
             }
-            
-            // TODO: Add another button to use sourceType = .camera?
             Spacer().frame(height:20)
-            Button() {
-                self.sourceType = .photoLibrary
-//                self.sourceType = .camera
-                self.isImagePickerDisplay.toggle()
+            Menu {
+                Button {
+                    self.sourceType = .camera
+                    self.isImagePickerDisplay.toggle()
+                } label: {
+                    Label("Camera", systemImage: "camera")
+                }
+                Button {
+                    self.sourceType = .photoLibrary
+                    self.isImagePickerDisplay.toggle()
+                } label: {
+                    Label("Photo Library", systemImage: "photo.on.rectangle")
+                }
             } label: {
                 Image(systemName: "plus")
                     .frame(width: 30, height: 40)
                     .foregroundColor(Color.black)
-            }.onChange(of: selectedImage, perform: { _ in
-                data = album.data
-                data.photos.append(Image(uiImage: selectedImage!))
-                album.update(from: data)
-            })
+            }
             .buttonStyle(.bordered)
             .buttonBorderShape(.capsule)
 
