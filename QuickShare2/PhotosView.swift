@@ -9,8 +9,9 @@ import SwiftUI
 
 struct PhotosView: View {
     let album: ThruAlbum
+    @State private var images: [Image] = [Image("Image 1"), Image("Image 2"), Image("Image 3")]
     @State private var data = ThruAlbum.Data()
-    @State private var photo = 1
+    @State private var photo = 0
     @State private var isPresentingEditView = false
     
     @State private var sourceType: UIImagePickerController.SourceType = .photoLibrary
@@ -21,8 +22,8 @@ struct PhotosView: View {
         VStack{
             GeometryReader{ proxy in
                 TabView(selection: $photo){
-                    ForEach(1...3, id: \.self){index in
-                        Image("Image \(Int(index))")
+                    ForEach(0...images.count - 1, id: \.self){index in
+                        images[index]
                             .resizable()
                             .scaledToFit()
                             .cornerRadius(24)
@@ -41,7 +42,7 @@ struct PhotosView: View {
 //                    .foregroundColor(.white)
 //            }
             
-            Button {
+            Button() {
                 self.sourceType = .photoLibrary
                 self.isImagePickerDisplay.toggle()
             } label: {
@@ -50,7 +51,9 @@ struct PhotosView: View {
                     .background(Color.black)
                     .clipShape(Circle())
                     .foregroundColor(.white)
-            }
+            }.onChange(of: selectedImage, perform: { _ in
+                images.append(Image(uiImage: selectedImage!))
+            })
         }
         .navigationTitle(album.symbol + " " + album.title)
         .toolbar {
