@@ -33,7 +33,7 @@ struct PhotosView: View {
                     }
                 }
                 .tabViewStyle(.page)
-                .indexViewStyle(.page(backgroundDisplayMode: .always))
+                .indexViewStyle(.page(backgroundDisplayMode: .automatic))
                 .frame(width: proxy.size.width, height: proxy.size.height)
             }
             
@@ -41,6 +41,7 @@ struct PhotosView: View {
             Spacer().frame(height:20)
             Button() {
                 self.sourceType = .photoLibrary
+//                self.sourceType = .camera
                 self.isImagePickerDisplay.toggle()
             } label: {
                 Image(systemName: "plus")

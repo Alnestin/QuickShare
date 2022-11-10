@@ -9,7 +9,7 @@ import SwiftUI
 
 struct EditView: View {
     @Binding var data: ThruAlbum.Data
-    @State private var selection = "None"
+    @State private var selection = "Never"
     let choices = ["Never", "Every Day", "Every Week", "Every 2 Weeks", "Every Month", "Every Year"]
 
     var body: some View {

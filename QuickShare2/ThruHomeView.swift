@@ -13,13 +13,17 @@ struct HomeView: View {
     
     var body: some View {
         List {
-            ForEach(buttons) { button in
-                NavigationLink(destination: AlbumsView(button: button, albums: $albums)) {
-                    ButtonView(button: button)
+            Section("Collections"){
+                ForEach(buttons) { button in
+                    NavigationLink(destination: AlbumsView(button: button, albums: $albums)) {
+                        ButtonView(button: button)
+                    }
                 }
             }
         }
         .navigationTitle("ThruTime")
+        .navigationBarTitleDisplayMode(.large)
+//        .scrollDisabled(true)
         .toolbar {
             Button(action: {}) {
                 Image(systemName: "person")

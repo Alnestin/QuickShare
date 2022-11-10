@@ -8,26 +8,54 @@
 import SwiftUI
 
 struct AlbumsView: View {
-    @State private var isPresentingEditView = false
+    @State private var isPresentingNewAlbumView = false
     let button: ThruButton
     @Binding var albums: [ThruAlbum]
+    @State private var newAlbumData = ThruAlbum.Data()
     var body: some View {
         List {
             Section(header: Text("Albums")) {
                 ForEach($albums) { $album in
-                    NavigationLink(destination: PhotosView(album: $album)) {
-                        AlbumButtonView(album: album)
+                    if (button.title == album.albumType)
+                    {
+                        NavigationLink(destination: PhotosView(album: $album)) {
+                            AlbumButtonView(album: album)
+                        }
                     }
+                }.onDelete { (indexSet) in
+                    albums.remove(atOffsets: indexSet)
                 }
             }
         }
         .navigationTitle(button.title)
         .toolbar {
-            Button(action: {isPresentingEditView = true}) {
+            Button(action: {isPresentingNewAlbumView = true}) {
                 Image(systemName: "plus")
             }
         }
-        .sheet(isPresented: $isPresentingEditView) {}
+        .sheet(isPresented: $isPresentingNewAlbumView) {
+            NavigationView {
+                EditView(data: $newAlbumData)
+                    .toolbar {
+                        ToolbarItem(placement: .cancellationAction) {
+                            Button("Dismiss") {
+                                isPresentingNewAlbumView = false
+                            }
+                        }
+                        ToolbarItem(placement: .principal) {
+                            Text("New Album").font(Font.headline.weight(.bold))
+                        }
+                        ToolbarItem(placement: .confirmationAction) {
+                            Button("Add") {
+                                newAlbumData.albumType = button.title
+                                let newAlbum = ThruAlbum(data: newAlbumData)
+                                albums.append(newAlbum)
+                                isPresentingNewAlbumView = false
+                            }
+                        }
+                    }
+            }
+        }
     }
 }
 
