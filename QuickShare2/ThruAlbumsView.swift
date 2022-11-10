@@ -10,12 +10,12 @@ import SwiftUI
 struct AlbumsView: View {
     @State private var isPresentingEditView = false
     let button: ThruButton
-    let albums: [ThruAlbum]
+    @Binding var albums: [ThruAlbum]
     var body: some View {
         List {
             Section(header: Text("Albums")) {
-                ForEach(albums) { album in
-                    NavigationLink(destination: PhotosView(album: album)) {
+                ForEach($albums) { $album in
+                    NavigationLink(destination: PhotosView(album: $album)) {
                         AlbumButtonView(album: album)
                     }
                 }
@@ -34,7 +34,7 @@ struct AlbumsView: View {
 struct AlbumsView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            AlbumsView(button: ThruButton.buttons[0], albums: ThruAlbum.albums)
+            AlbumsView(button: ThruButton.buttons[0], albums: .constant(ThruAlbum.albums))
         }
     }
 }

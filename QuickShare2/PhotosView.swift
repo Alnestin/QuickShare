@@ -8,8 +8,7 @@
 import SwiftUI
 
 struct PhotosView: View {
-    let album: ThruAlbum
-    @State private var images: [Image] = [Image("Image 1"), Image("Image 2"), Image("Image 3")]
+    @Binding var album: ThruAlbum
     @State private var data = ThruAlbum.Data()
     @State private var photo = 0
     @State private var isPresentingEditView = false
@@ -23,36 +22,44 @@ struct PhotosView: View {
         VStack{
             GeometryReader{ proxy in
                 TabView(selection: $photo){
-                    ForEach(0...images.count - 1, id: \.self){index in
-                        images[index]
+                    ForEach(0..<album.photos.count, id: \.self){index in
+                        album.photos[index]
                             .resizable()
-                            .scaledToFit()
+                            .scaledToFill()
+                            .scaleEffect()
+                            .frame(width: proxy.size.width/1.05, height: proxy.size.height)
                             .cornerRadius(24)
                             .tag(index)
                     }
                 }
-                .tabViewStyle(PageTabViewStyle())
-                .frame(width: proxy.size.width, height: proxy.size.height/1.3)
+                .tabViewStyle(.page)
+                .indexViewStyle(.page(backgroundDisplayMode: .always))
+                .frame(width: proxy.size.width, height: proxy.size.height)
             }
             
             // TODO: Add another button to use sourceType = .camera?
+            Spacer().frame(height:20)
             Button() {
                 self.sourceType = .photoLibrary
                 self.isImagePickerDisplay.toggle()
             } label: {
                 Image(systemName: "plus")
-                    .frame(width: 40, height: 40)
+                    .frame(width: 50, height: 50)
                     .background(Color.black)
                     .clipShape(Circle())
                     .foregroundColor(.white)
             }.onChange(of: selectedImage, perform: { _ in
-                images.append(Image(uiImage: selectedImage!))
+                data = album.data
+                data.photos.append(Image(uiImage: selectedImage!))
+                album.update(from: data)
             })
         }
         .navigationTitle(album.symbol + " " + album.title)
+        .background(Color.white)
         .toolbar {
-            Button(action: {isPresentingEditView = true}) {
-                Text("Edit")
+            Button("Edit") {
+                isPresentingEditView = true
+                data = album.data
             }
         }
         .sheet(isPresented: $isPresentingEditView){
@@ -70,6 +77,7 @@ struct PhotosView: View {
                         ToolbarItem(placement: .confirmationAction) {
                             Button("Done") {
                                 isPresentingEditView = false
+                                album.update(from:data)
                             }
                         }
                     }
@@ -84,7 +92,7 @@ struct PhotosView: View {
 struct PhotosView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            PhotosView(album: ThruAlbum.albums[0])
+            PhotosView(album: .constant(ThruAlbum.albums[0]))
         }
     }
 }

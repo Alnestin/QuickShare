@@ -9,11 +9,12 @@ import SwiftUI
 
 struct HomeView: View {
     let buttons: [ThruButton]
+    @State private var albums = ThruAlbum.albums
     
     var body: some View {
         List {
             ForEach(buttons) { button in
-                NavigationLink(destination: AlbumsView(button: button, albums: ThruAlbum.albums)) {
+                NavigationLink(destination: AlbumsView(button: button, albums: $albums)) {
                     ButtonView(button: button)
                 }
             }
