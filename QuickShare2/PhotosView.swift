@@ -9,7 +9,6 @@ import SwiftUI
 
 struct PhotosView: View {
     let album: ThruAlbum
-    //    let albums: [ThruAlbum]
     @State private var data = ThruAlbum.Data()
     @State private var photo = 1
     @State private var isPresentingEditView = false
@@ -18,8 +17,8 @@ struct PhotosView: View {
         VStack{
             GeometryReader{ proxy in
                 TabView(selection: $photo){
-                    ForEach(1...30, id: \.self){index in
-                        Image("Image \((Int(index)%3)+1)")
+                    ForEach(1...3, id: \.self){index in
+                        Image("Image \(Int(index))")
                             .resizable()
                             .scaledToFit()
                             .cornerRadius(24)
@@ -32,8 +31,6 @@ struct PhotosView: View {
             
             Button{} label: {
                 Image(systemName: "plus")
-                //                    .resizable()
-                //                    .padding(6)
                     .frame(width: 40, height: 40)
                     .background(Color.black)
                     .clipShape(Circle())
