@@ -69,7 +69,7 @@ struct ThruAlbum: Identifiable {
 extension ThruAlbum {
     static let albums: [ThruAlbum] =
     [
-        ThruAlbum(title: "Plant", symbol: "🪴", description: "My first plant", freq: "Every Week", photos: [Image("Image 1"), Image("Image 2"), Image("Image 3"), Image("Image 4")], albumType: "ThruTime"),
+        ThruAlbum(title: "Plant", symbol: "🪴", description: "My first plant", freq: "Every Week", photos: [], albumType: "ThruTime"),
         ThruAlbum(title: "Me", symbol: "👨‍🎓", description: "Me", freq: "Never", photos: [], albumType: "ThruDates"),
         ThruAlbum(title: "Dog", symbol: "🐶", description: "My first pet", freq: "Every Day", photos: [], albumType: "ThruPlaces"),
         ThruAlbum(title: "Family", symbol: "👨‍👩‍👦", description: "My fam", freq: "Every Year", photos: [], albumType: "ThruPeople")

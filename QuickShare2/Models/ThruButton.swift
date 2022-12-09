@@ -17,6 +17,21 @@ struct ThruButton: Identifiable {
         self.title = title
         self.symbol = symbol
     }
+    
+    struct Data {
+        var symbol: String = ""
+        var title: String = "Untitled"
+    }
+    
+    var data: Data {
+        Data(symbol: symbol, title: title)
+    }
+
+    init(data: Data) {
+        id = UUID()
+        title = data.title
+        symbol = data.symbol
+        }
 }
 
 extension ThruButton {
@@ -24,6 +39,7 @@ extension ThruButton {
     [
         ThruButton(title: "ThruTime", symbol: "clock"),
         ThruButton(title: "ThruPlaces", symbol: "mappin"),
+        ThruButton(title: "ThruHome", symbol: "house"),
         ThruButton(title: "ThruPeople", symbol: "person.3"),
         ThruButton(title: "ThruDates", symbol: "calendar")
     ]

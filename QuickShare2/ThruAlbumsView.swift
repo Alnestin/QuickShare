@@ -27,7 +27,6 @@ struct AlbumsView: View {
                 }
             }
         }
-        .navigationTitle(button.title)
         .toolbar {
             Button(action: {isPresentingNewAlbumView = true}) {
                 Image(systemName: "plus")

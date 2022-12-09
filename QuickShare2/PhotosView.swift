@@ -19,6 +19,7 @@ struct PhotosView: View {
     @State private var isImagePickerDisplay = false
     
     var body: some View {
+        
         VStack{
             GeometryReader{ proxy in
                 TabView(selection: $photo){
@@ -54,11 +55,15 @@ struct PhotosView: View {
                 Image(systemName: "plus")
                     .frame(width: 30, height: 40)
                     .foregroundColor(Color.black)
-            }
+            }.onChange(of: selectedImage, perform: { _ in
+                data = album.data
+                data.photos.append(Image(uiImage: selectedImage!))
+                album.update(from: data)
+            })
             .buttonStyle(.bordered)
             .buttonBorderShape(.capsule)
-
         }
+        
         .navigationTitle(album.symbol + " " + album.title)
         .toolbar {
             Button("Edit") {

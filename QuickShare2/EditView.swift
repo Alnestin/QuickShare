@@ -9,16 +9,22 @@ import SwiftUI
 
 struct EditView: View {
     @Binding var data: ThruAlbum.Data
-    @State private var selection = "Never"
-    let choices = ["Never", "Every Day", "Every Week", "Every 2 Weeks", "Every Month", "Every Year"]
-
+    @State private var frequency = "Never"
+    let frequencyChoices = ["Never", "Every Day", "Every Week", "Every 2 Weeks", "Every Month", "Every Year"]
+    let typeChoices = ["ThruTime", "ThruPlaces", "ThruPeople", "ThruDates"]
     var body: some View {
         Form{
             Section{
                 TextField("Title", text: $data.title).modifier(TextFieldClearButton(text: $data.title))
                 TextField("Symbol", text: $data.symbol).modifier(TextFieldClearButton(text: $data.symbol))
-                Picker("Frequency", selection: $selection) {
-                    ForEach(choices, id: \.self) {
+                Picker("Type", selection: $data.albumType) {
+                    ForEach(typeChoices, id: \.self) {
+                        Text($0)
+                    }
+                }
+                .pickerStyle(.menu)
+                Picker("Frequency", selection: $frequency) {
+                    ForEach(frequencyChoices, id: \.self) {
                         Text($0)
                     }
                     Divider()

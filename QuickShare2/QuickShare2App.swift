@@ -9,11 +9,10 @@ import SwiftUI
 
 @main
 struct QuickShare2: App {
+    @State private var buttons = ThruButton.buttons
     var body: some Scene {
         WindowGroup {
-            NavigationView {
-                HomeView(buttons: ThruButton.buttons)
-            }
+                ThruHomeView2(buttons: buttons).navigationViewStyle(StackNavigationViewStyle())
         }
     }
 }
