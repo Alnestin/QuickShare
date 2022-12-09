@@ -4,16 +4,42 @@
 //
 //  Created by Ernesto Zubillaga on 10/20/22.
 //
+
 import SwiftUI
 
 struct AlbumButtonView: View {
     let album: ThruAlbum
     var body: some View {
-        HStack {
-            Text(album.symbol).font(.largeTitle)
-            Text(album.title).font(.title2)
-        }.font(.headline)
-        .padding()
+        VStack (spacing:10) {
+            if let photo = album.photos.first {
+                photo
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 170, height: 135)
+                    .cornerRadius(15)
+                
+            } else {
+                Image(systemName: "photo")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 170, height: 135)
+                    .cornerRadius(15)
+                    .foregroundColor(Color.gray)
+            }
+            HStack {
+                Text(album.symbol)
+                Text(album.title).foregroundColor(Color.black)
+                    .padding(5)
+            }.font(.headline)
+                
+            
+            
+            
+        }
+        .background(
+            Color.gray
+                .brightness(0.35)
+        )
     }
 }
 
