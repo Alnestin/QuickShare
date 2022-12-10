@@ -50,6 +50,7 @@ struct AlbumsView: View {
                                 let newAlbum = ThruAlbum(data: newAlbumData)
                                 albums.append(newAlbum)
                                 isPresentingNewAlbumView = false
+                                
                             }
                         }
                     }

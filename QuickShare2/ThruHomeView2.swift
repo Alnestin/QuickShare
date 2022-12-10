@@ -79,6 +79,7 @@ struct ThruHomeView2: View {
                                         Button("Add") {
                                             let newAlbum = ThruAlbum(data: newAlbumData)
                                             albums.append(newAlbum)
+                                            uploadAlbumData(album: newAlbum)
                                             isPresentingNewAlbumView = false
                                         }
                                     }
@@ -93,6 +94,38 @@ struct ThruHomeView2: View {
             }
         }
         .onAppear(perform: loadImageFromFirebase)
+    }
+    
+    // When an album is created, create it in firebase
+    func uploadAlbumData(album: ThruAlbum) {
+        // Put album data into a dictionary
+        let dic: [String: Any] = ["id": album.id.uuidString, "title": album.title, "description": album.description,
+                                  "symbol": album.symbol, "freq": album.freq, "type": album.albumType]
+        let fileName = "metadata.json"
+        
+        do {
+            // Put the data in a json file.
+            let fileUrl = try FileManager.default
+                .url(for: .applicationSupportDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+                .appendingPathComponent(fileName)
+
+            try JSONSerialization.data(withJSONObject: dic)
+                .write(to: fileUrl)
+            
+            // Create the album in the database and put the metadata.
+            let filePath = "/user1/\(album.albumType)/\(album.title)/\(fileName)"
+            let storageRef = Storage.storage().reference().child(filePath)
+            storageRef.putFile(from: fileUrl, metadata: nil) { (metadata, error ) in
+                guard let error = error else {
+                    if error != nil {
+                        print((error?.localizedDescription)!)
+                    }
+                    return
+                }
+            }
+        } catch {
+            print(error)
+        }
     }
     
     func deleteAlbum(album: ThruAlbum) {

@@ -117,7 +117,7 @@ struct PhotosView: View {
         let timestamp = NSDate().timeIntervalSince1970
         let stimestamp = String(timestamp).replacingOccurrences(of: ".", with: "")
         
-        let fileName = "/user1/\(albumType)/\(albumName)/\(stimestamp).jpeg" // TODO: Change this to always output a different name, idk how
+        let fileName = "/user1/\(albumType)/\(albumName)/\(stimestamp).jpeg"
         let storageRef = Storage.storage().reference().child(fileName)
         print(fileUrl)
         storageRef.putFile(from: fileUrl, metadata: nil) { (metadata, error ) in
