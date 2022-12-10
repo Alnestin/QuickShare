@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import FirebaseStorage
 
 struct PhotosView: View {
     @Binding var album: ThruAlbum
@@ -16,6 +17,7 @@ struct PhotosView: View {
     // Things needed to use camera roll or photo library
     @State private var sourceType: UIImagePickerController.SourceType = .photoLibrary
     @State private var selectedImage: UIImage?
+    @State private var imageUrl: URL? // The image url used to upload the picture to firebase
     @State private var isImagePickerDisplay = false
     
     var body: some View {
@@ -59,6 +61,7 @@ struct PhotosView: View {
                 data = album.data
                 data.photos.append(Image(uiImage: selectedImage!))
                 album.update(from: data)
+                uploadPicture(fileUrl: imageUrl!)
             })
             .buttonStyle(.bordered)
             .buttonBorderShape(.capsule)
@@ -93,7 +96,22 @@ struct PhotosView: View {
             }
         }
         .sheet(isPresented: self.$isImagePickerDisplay) {
-            ImagePickerView(selectedImage: self.$selectedImage, sourceType: self.sourceType)
+            ImagePickerView(selectedImage: self.$selectedImage, imageUrl: self.$imageUrl, sourceType: self.sourceType)
+        }
+    }
+    
+    // This method allows you to upload a picture through its url
+    func uploadPicture(fileUrl: URL) {
+        let fileName = "\(album.photos.count).jpeg" // TODO: Change this to always output a different name, idk how
+        let storageRef = Storage.storage().reference().child(fileName)
+        print(fileUrl)
+        storageRef.putFile(from: fileUrl, metadata: nil) { (metadata, error ) in
+            guard let error = error else {
+                if error != nil {
+                    print("Something went wrong!")
+                }
+                return
+              }
         }
     }
 }

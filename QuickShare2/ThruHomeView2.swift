@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import FirebaseStorage
+import SDWebImageSwiftUI
 
 struct ThruHomeView2: View {
     let buttons: [ThruButton]
@@ -17,91 +19,103 @@ struct ThruHomeView2: View {
         GridItem(.fixed(100), spacing: 95, alignment: .center),
         GridItem(.fixed(100), spacing: 95, alignment: .center)
     ]
+    @State private var imageURL = URL(string: "")
+    @State private var imageURLs: [URL] = []
     
     var body: some View {
-        TabView(selection: $selectedTab){
-            //            ForEach(buttons) { button in
-            //                AlbumsView(button: button, albums: $albums)
-            //                    .tabItem {
-            //                        Label(button.title, systemImage: button.symbol)
-            //
-            //                    }
-            //            }
-            //        }
-
-            ForEach(0..<5) { i in
-                    if i != 2 {
-                        NavigationStack {
-                            ScrollView {
-                                LazyVGrid(columns: gridItemLayout, spacing: 20) {
-                                    ForEach($albums) { $album in
-                                        if (buttons[selectedTab].title == album.albumType)
-                                        {
-                                            NavigationLink(destination: PhotosView(album: $album)) {
-                                                AlbumButtonView(album: album)
-                                                    .cornerRadius(15)
+        // The VStack below is how you can get the webimages from url. Note that you have to import SDWebImageSwiftUI
+//        VStack{
+//            Text("\(imageURL?.absoluteString ?? "placeholder")").onAppear(perform: loadImageFromFirebase)
+//
+//            // Puts each image from the imageURLs list into a WebImage
+//            ForEach(0..<imageURLs.count, id: \.self){ index in
+//                WebImage(url: imageURLs[index])
+//                    .resizable()
+//                    .aspectRatio(contentMode: .fit)
+//            }
+//            WebImage(url: imageURL)
+//                        .resizable()
+//                        .aspectRatio(contentMode: .fit)
+//        }
+                TabView(selection: $selectedTab){
+                    //            ForEach(buttons) { button in
+                    //                AlbumsView(button: button, albums: $albums)
+                    //                    .tabItem {
+                    //                        Label(button.title, systemImage: button.symbol)
+                    //
+                    //                    }
+                    //            }
+                    //        }
+        
+                    ForEach(0..<5) { i in
+                            if i != 2 {
+                                NavigationStack {
+                                    ScrollView {
+                                        LazyVGrid(columns: gridItemLayout, spacing: 20) {
+                                            ForEach($albums) { $album in
+                                                if (buttons[selectedTab].title == album.albumType)
+                                                {
+                                                    NavigationLink(destination: PhotosView(album: $album)) {
+                                                        AlbumButtonView(album: album)
+                                                            .cornerRadius(15)
+                                                    }
+                                                }
                                             }
                                         }
                                     }
+                                    .navigationTitle(buttons[i].title)
                                 }
+                                .tabItem {
+                                    Image(systemName: buttons[i].symbol)
+                                    Text(buttons[i].title)
+                                }.tag(i)
+        
+                            } else {
+                                Text("Hola")
+                                    .tabItem {
+                                        Image(systemName: buttons[i].symbol)
+                                        Text(buttons[i].title)
+                                    }.tag(i)
                             }
-                            .navigationTitle(buttons[i].title)
-                        }
-                        .tabItem {
-                            Image(systemName: buttons[i].symbol)
-                            Text(buttons[i].title)
-                        }.tag(i)
-
-                    } else {
-                        Text("Hola")
-                            .tabItem {
-                                Image(systemName: buttons[i].symbol)
-                                Text(buttons[i].title)
-                            }.tag(i)
                     }
+                }
+    }
+    
+//    // Loads all the image URLs from firebase and appends them to the imageURLs list.
+//    func loadImageFromFirebase() {
+//        let storageRef = Storage.storage().reference().child("images")
+//        storageRef.listAll { (result, error) in
+//            if error != nil {
+//                print((error?.localizedDescription)!)
+//                return
+//            }
+//            print(result!.items.count)
+//            for item in result!.items {
+//                item.downloadURL { (url, error) in
+//                    if error != nil {
+//                        print((error?.localizedDescription)!)
+//                        return
+//                    }
+//                    self.imageURLs.append(url!)
+//                }
+//            }
+//        }
+
+        // This is is you want to download a single image with instead of child you just use reference and the path.
+//        storageRef.downloadURL { (url, error) in
+//            if error != nil {
+//                print((error?.localizedDescription)!)
+//                return
+//            }
+//            self.imageURL = url!
+//        }
+    }
+    
+    struct ThruHomeView2_Previews: PreviewProvider {
+        static var previews: some View {
+            NavigationView {
+                ThruHomeView2(buttons: ThruButton.buttons)
             }
         }
-//        .toolbar {
-//            ToolbarItem(placement: .navigationBarTrailing) {
-//                Button(action: {}, label: {
-//                    Image(systemName: "person")
-//                })
-//            }
-//            ToolbarItem(placement: .navigationBarLeading) {
-//                Button(action: {isPresentingNewAlbumView = true}, label: {
-//                    Image(systemName: "plus")
-//                })
-//            }
-//        }
-//        .sheet(isPresented: $isPresentingNewAlbumView) {
-//            NavigationView {
-//                EditView(data: $newAlbumData)
-//                    .toolbar {
-//                        ToolbarItem(placement: .cancellationAction) {
-//                            Button("Dismiss") {
-//                                isPresentingNewAlbumView = false
-//                            }
-//                        }
-//                        ToolbarItem(placement: .principal) {
-//                            Text("New Album").font(Font.headline.weight(.bold))
-//                        }
-//                        ToolbarItem(placement: .confirmationAction) {
-//                            Button("Add") {
-//                                let newAlbum = ThruAlbum(data: newAlbumData)
-//                                albums.append(newAlbum)
-//                                isPresentingNewAlbumView = false
-//                            }
-//                        }
-//                    }
-//            }
-//        }
     }
-}
-
-struct ThruHomeView2_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationView {
-            ThruHomeView2(buttons: ThruButton.buttons)
-        }
-    }
-}
+//}

@@ -11,6 +11,7 @@ import SwiftUI
 struct ImagePickerView: UIViewControllerRepresentable {
     
     @Binding var selectedImage: UIImage?
+    @Binding var imageUrl: URL?
     @Environment(\.presentationMode) var isPresented
     var sourceType: UIImagePickerController.SourceType
         
@@ -40,6 +41,8 @@ class Coordinator: NSObject, UINavigationControllerDelegate, UIImagePickerContro
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         guard let selectedImage = info[.originalImage] as? UIImage else { return }
+        let imageUrl = info[UIImagePickerController.InfoKey.imageURL] as! URL // Added to get the url of the image (where its stored)
+        self.picker.imageUrl = imageUrl
         self.picker.selectedImage = selectedImage
         self.picker.isPresented.wrappedValue.dismiss()
     }
