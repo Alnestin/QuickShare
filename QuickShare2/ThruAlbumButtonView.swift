@@ -6,13 +6,14 @@
 //
 
 import SwiftUI
+import SDWebImageSwiftUI
 
 struct AlbumButtonView: View {
     let album: ThruAlbum
     var body: some View {
         VStack (spacing:10) {
             if let photo = album.photos.first {
-                photo
+                WebImage(url: photo)
                     .resizable()
                     .scaledToFill()
                     .frame(width: 170, height: 135)

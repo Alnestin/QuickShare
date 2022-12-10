@@ -23,99 +23,151 @@ struct ThruHomeView2: View {
     @State private var imageURLs: [URL] = []
     
     var body: some View {
-        // The VStack below is how you can get the webimages from url. Note that you have to import SDWebImageSwiftUI
-//        VStack{
-//            Text("\(imageURL?.absoluteString ?? "placeholder")").onAppear(perform: loadImageFromFirebase)
-//
-//            // Puts each image from the imageURLs list into a WebImage
-//            ForEach(0..<imageURLs.count, id: \.self){ index in
-//                WebImage(url: imageURLs[index])
-//                    .resizable()
-//                    .aspectRatio(contentMode: .fit)
-//            }
-//            WebImage(url: imageURL)
-//                        .resizable()
-//                        .aspectRatio(contentMode: .fit)
-//        }
-                TabView(selection: $selectedTab){
-                    //            ForEach(buttons) { button in
-                    //                AlbumsView(button: button, albums: $albums)
-                    //                    .tabItem {
-                    //                        Label(button.title, systemImage: button.symbol)
-                    //
-                    //                    }
-                    //            }
-                    //        }
-        
-                    ForEach(0..<5) { i in
-                            if i != 2 {
-                                NavigationStack {
-                                    ScrollView {
-                                        LazyVGrid(columns: gridItemLayout, spacing: 20) {
-                                            ForEach($albums) { $album in
-                                                if (buttons[selectedTab].title == album.albumType)
-                                                {
-                                                    NavigationLink(destination: PhotosView(album: $album)) {
-                                                        AlbumButtonView(album: album)
-                                                            .cornerRadius(15)
-                                                    }
+        TabView(selection: $selectedTab) {
+            ForEach(0..<4) { i in
+                NavigationStack {
+                    ScrollView {
+                        LazyVGrid(columns: gridItemLayout, spacing: 20) {
+                            ForEach($albums) { $album in
+                                if (buttons[selectedTab].title == album.albumType)
+                                {
+                                    NavigationLink(destination: PhotosView(album: $album)) {
+                                        AlbumButtonView(album: album)
+                                            .cornerRadius(15)
+                                            .contextMenu {
+                                                
+                                                Button (action: {
+//                                                    let d = album.photos.remove(at: album.photos.index(of: album))
+                                                    deleteAlbum(album: album)
+                                                }){
+                                                    Image(systemName: "trash")
+                                                    Text("Delete")
                                                 }
+                                                
                                             }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    .navigationTitle(buttons[i].title)
+                    .toolbar {
+                        ToolbarItem(placement: .navigationBarTrailing) {
+                            Button(action: {}, label: {
+                                Image(systemName: "person")
+                            })
+                        }
+                        ToolbarItem(placement: .navigationBarLeading) {
+                            Button(action: {isPresentingNewAlbumView = true}, label: {
+                                Image(systemName: "plus")
+                            })
+                        }
+                    }
+                    .sheet(isPresented: $isPresentingNewAlbumView) {
+                        NavigationView {
+                            EditView(data: $newAlbumData)
+                                .toolbar {
+                                    ToolbarItem(placement: .cancellationAction) {
+                                        Button("Dismiss") {
+                                            isPresentingNewAlbumView = false
                                         }
                                     }
-                                    .navigationTitle(buttons[i].title)
+                                    ToolbarItem(placement: .principal) {
+                                        Text("New Album").font(Font.headline.weight(.bold))
+                                    }
+                                    ToolbarItem(placement: .confirmationAction) {
+                                        Button("Add") {
+                                            let newAlbum = ThruAlbum(data: newAlbumData)
+                                            albums.append(newAlbum)
+                                            isPresentingNewAlbumView = false
+                                        }
+                                    }
                                 }
-                                .tabItem {
-                                    Image(systemName: buttons[i].symbol)
-                                    Text(buttons[i].title)
-                                }.tag(i)
-        
-                            } else {
-                                Text("Hola")
-                                    .tabItem {
-                                        Image(systemName: buttons[i].symbol)
-                                        Text(buttons[i].title)
-                                    }.tag(i)
-                            }
+                        }
                     }
                 }
+                .tabItem {
+                    Image(systemName: buttons[i].symbol)
+                    Text(buttons[i].title)
+                }.tag(i)
+            }
+        }
+        .onAppear(perform: loadImageFromFirebase)
     }
     
-//    // Loads all the image URLs from firebase and appends them to the imageURLs list.
-//    func loadImageFromFirebase() {
-//        let storageRef = Storage.storage().reference().child("images")
-//        storageRef.listAll { (result, error) in
-//            if error != nil {
-//                print((error?.localizedDescription)!)
-//                return
-//            }
-//            print(result!.items.count)
-//            for item in result!.items {
-//                item.downloadURL { (url, error) in
-//                    if error != nil {
-//                        print((error?.localizedDescription)!)
-//                        return
-//                    }
-//                    self.imageURLs.append(url!)
-//                }
-//            }
-//        }
-
-        // This is is you want to download a single image with instead of child you just use reference and the path.
-//        storageRef.downloadURL { (url, error) in
-//            if error != nil {
-//                print((error?.localizedDescription)!)
-//                return
-//            }
-//            self.imageURL = url!
-//        }
-    }
-    
-    struct ThruHomeView2_Previews: PreviewProvider {
-        static var previews: some View {
-            NavigationView {
-                ThruHomeView2(buttons: ThruButton.buttons)
+    func deleteAlbum(album: ThruAlbum) {
+        let fileName = "user1/\(album.albumType)/\(album.title)"
+        let storageRef = Storage.storage().reference().child(fileName)
+        
+        storageRef.delete {error in
+            if let error = error {
+                print(error.localizedDescription)
+            } else {
+                print("Pic deleted")
             }
         }
     }
-//}
+    // Loads all the image URLs from firebase and appends them to the imageURLs list.
+    func loadImageFromFirebase() {
+        for loc in ["ThruTime", "ThruPeople", "ThruDates", "ThruPlaces"] {
+            let storageRef = Storage.storage().reference().child("user1/" + loc)
+            storageRef.listAll { (result, error) in
+                if error != nil {
+                    print((error?.localizedDescription)!)
+                    return
+                }
+                for p in result!.prefixes {
+                    p.listAll{ (imgs , err) in
+                        if err != nil {
+                            print((err?.localizedDescription)!)
+                            return
+                        }
+                        let newAlbum = ThruAlbum(title: p.name, symbol: "", description: "", freq: "", photos: [], albumType: loc)
+                        for item in imgs!.items {
+                            item.downloadURL { (url, err1) in
+                                if err1 != nil {
+                                    print((err1?.localizedDescription)!)
+                                    return
+                                }
+                                for i in 0..<self.albums.count {
+                                    if newAlbum.title == self.albums[i].title {
+                                        self.albums[i].photos.append(url!)
+                                        self.albums[i].photos = self.albums[i].photos.sorted( by:{
+                                            
+                                            let c1 = $0.lastPathComponent.components(separatedBy: ".")
+                                            let c2 = $1.lastPathComponent.components(separatedBy: ".")
+                                            
+                                            let v1 = Int(c1[0].prefix(16))
+                                            let v2 = Int(c2[0].prefix(16))
+                                            
+                                            return v1! < v2!
+                                        })
+                                        
+                                    }
+                                }
+                            }
+                        }
+                        self.albums.append(newAlbum)
+                    }
+                }
+            }
+            
+            // This is is you want to download a single image with instead of child you just use reference and the path.
+            storageRef.downloadURL { (url, error) in
+                if error != nil {
+                    print((error?.localizedDescription)!)
+                    return
+                }
+                self.imageURL = url!
+            }
+        }
+    }
+}
+    
+struct ThruHomeView2_Previews: PreviewProvider {
+    static var previews: some View {
+        NavigationView {
+            ThruHomeView2(buttons: ThruButton.buttons)
+        }
+    }
+}

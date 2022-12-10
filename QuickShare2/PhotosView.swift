@@ -7,6 +7,7 @@
 
 import SwiftUI
 import FirebaseStorage
+import SDWebImageSwiftUI
 
 struct PhotosView: View {
     @Binding var album: ThruAlbum
@@ -26,13 +27,24 @@ struct PhotosView: View {
             GeometryReader{ proxy in
                 TabView(selection: $photo){
                     ForEach(0..<album.photos.count, id: \.self){index in
-                        album.photos[index]
+                        WebImage(url: album.photos[index])
                             .resizable()
                             .scaledToFill()
                             .scaleEffect()
                             .frame(width: proxy.size.width/1.05, height: proxy.size.height)
                             .cornerRadius(24)
                             .tag(index)
+                            .contextMenu {
+                                
+                                Button (action: {
+                                    let d = album.photos.remove(at: index)
+                                    deletePicture(fileUrl: d, albumType: album.albumType, albumName: album.title)
+                                }){
+                                    Image(systemName: "trash")
+                                    Text("Delete")
+                                }
+                                
+                            }
                     }
                 }
                 .tabViewStyle(.page)
@@ -59,9 +71,9 @@ struct PhotosView: View {
                     .foregroundColor(Color.black)
             }.onChange(of: selectedImage, perform: { _ in
                 data = album.data
-                data.photos.append(Image(uiImage: selectedImage!))
+                data.photos.append(imageUrl!)
                 album.update(from: data)
-                uploadPicture(fileUrl: imageUrl!)
+                uploadPicture(fileUrl: imageUrl!, albumType: album.albumType, albumName: album.title)
             })
             .buttonStyle(.bordered)
             .buttonBorderShape(.capsule)
@@ -101,17 +113,33 @@ struct PhotosView: View {
     }
     
     // This method allows you to upload a picture through its url
-    func uploadPicture(fileUrl: URL) {
-        let fileName = "\(album.photos.count).jpeg" // TODO: Change this to always output a different name, idk how
+    func uploadPicture(fileUrl: URL, albumType: String, albumName: String ) {
+        let timestamp = NSDate().timeIntervalSince1970
+        let stimestamp = String(timestamp).replacingOccurrences(of: ".", with: "")
+        
+        let fileName = "/user1/\(albumType)/\(albumName)/\(stimestamp).jpeg" // TODO: Change this to always output a different name, idk how
         let storageRef = Storage.storage().reference().child(fileName)
         print(fileUrl)
         storageRef.putFile(from: fileUrl, metadata: nil) { (metadata, error ) in
             guard let error = error else {
                 if error != nil {
-                    print("Something went wrong!")
+                    print((error?.localizedDescription)!)
                 }
                 return
-              }
+            }
+        }
+    }
+    
+    func deletePicture(fileUrl: URL, albumType: String, albumName: String) {
+        let fileName = "/user1/\(albumType)/\(albumName)/\(fileUrl.lastPathComponent)"
+        let storageRef = Storage.storage().reference().child(fileName)
+        
+        storageRef.delete {error in
+            if let error = error {
+                print("Something we wrong")
+            } else {
+                print("Pic deleted")
+            }
         }
     }
 }

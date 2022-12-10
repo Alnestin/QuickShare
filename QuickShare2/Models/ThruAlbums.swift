@@ -15,10 +15,10 @@ struct ThruAlbum: Identifiable {
     var freq: String
     var endDate: Int
     var description: String
-    var photos: [Image]
+    var photos: [URL]
     var albumType: String
     
-    init(id: UUID = UUID(), title: String, symbol: String, description: String, freq: String, photos: [Image], albumType: String) {
+    init(id: UUID = UUID(), title: String, symbol: String, description: String, freq: String, photos: [URL], albumType: String) {
         self.id = id
         self.title = title
         self.symbol = symbol
@@ -35,7 +35,7 @@ struct ThruAlbum: Identifiable {
         var freq: String = "Never"
         var endDate: Int = 0
         var description: String = ""
-        var photos: [Image] = []
+        var photos: [URL] = []
         var albumType: String = "ThruTime"
     }
     
@@ -68,10 +68,5 @@ struct ThruAlbum: Identifiable {
 }
 extension ThruAlbum {
     static let albums: [ThruAlbum] =
-    [
-        ThruAlbum(title: "Plant", symbol: "🪴", description: "My first plant", freq: "Every Week", photos: [], albumType: "ThruTime"),
-        ThruAlbum(title: "Me", symbol: "👨‍🎓", description: "Me", freq: "Never", photos: [], albumType: "ThruDates"),
-        ThruAlbum(title: "Dog", symbol: "🐶", description: "My first pet", freq: "Every Day", photos: [], albumType: "ThruPlaces"),
-        ThruAlbum(title: "Family", symbol: "👨‍👩‍👦", description: "My fam", freq: "Every Year", photos: [], albumType: "ThruPeople")
-    ]
+    []
 }

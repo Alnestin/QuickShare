@@ -11,6 +11,7 @@
 		0479E629294134FF007F1DD3 /* ThruHomeView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0479E628294134FF007F1DD3 /* ThruHomeView2.swift */; };
 		0479E62D2942675E007F1DD3 /* TestAlbumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0479E62C2942675E007F1DD3 /* TestAlbumView.swift */; };
 		0479E62F29426777007F1DD3 /* TestNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0479E62E29426777007F1DD3 /* TestNotification.swift */; };
+		0479E634294422D1007F1DD3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0479E633294422D1007F1DD3 /* GoogleService-Info.plist */; };
 		E110247B2901BB4200CBBA90 /* QuickShare2App.swift in Sources */ = {isa = PBXBuildFile; fileRef = E110247A2901BB4200CBBA90 /* QuickShare2App.swift */; };
 		E110247F2901BB4400CBBA90 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E110247E2901BB4400CBBA90 /* Assets.xcassets */; };
 		E11024822901BB4400CBBA90 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E11024812901BB4400CBBA90 /* Preview Assets.xcassets */; };
@@ -20,7 +21,6 @@
 		E12227EE2942EE76001301AF /* ThruAlbumButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12227ED2942EE76001301AF /* ThruAlbumButtonView.swift */; };
 		E128D963291CC7DC002CF414 /* ImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E128D962291CC7DC002CF414 /* ImagePickerView.swift */; };
 		E14E63C0290312C600A3DAF8 /* PhotosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14E63BF290312C600A3DAF8 /* PhotosView.swift */; };
-		E15B586F2943C0EE0076415D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E15B586E2943C0EE0076415D /* GoogleService-Info.plist */; };
 		E15B58722943C1340076415D /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = E15B58712943C1340076415D /* FirebaseAnalytics */; };
 		E15B58742943C1340076415D /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = E15B58732943C1340076415D /* FirebaseAnalyticsOnDeviceConversion */; };
 		E15B58762943C1340076415D /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = E15B58752943C1340076415D /* FirebaseAnalyticsSwift */; };
@@ -62,6 +62,7 @@
 		0479E628294134FF007F1DD3 /* ThruHomeView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThruHomeView2.swift; sourceTree = "<group>"; };
 		0479E62C2942675E007F1DD3 /* TestAlbumView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestAlbumView.swift; sourceTree = "<group>"; };
 		0479E62E29426777007F1DD3 /* TestNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestNotification.swift; sourceTree = "<group>"; };
+		0479E633294422D1007F1DD3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E11024772901BB4200CBBA90 /* QuickShare2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QuickShare2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E110247A2901BB4200CBBA90 /* QuickShare2App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickShare2App.swift; sourceTree = "<group>"; };
 		E110247E2901BB4400CBBA90 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -74,7 +75,6 @@
 		E12227ED2942EE76001301AF /* ThruAlbumButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThruAlbumButtonView.swift; sourceTree = "<group>"; };
 		E128D962291CC7DC002CF414 /* ImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerView.swift; sourceTree = "<group>"; };
 		E14E63BF290312C600A3DAF8 /* PhotosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosView.swift; sourceTree = "<group>"; };
-		E15B586E2943C0EE0076415D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FC5C46C22901DF46001886C0 /* ThruButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThruButton.swift; sourceTree = "<group>"; };
 		FC5C46C42901E6E3001886C0 /* ThruHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThruHomeView.swift; sourceTree = "<group>"; };
 		FC5C46C62901E87A001886C0 /* ThruButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThruButtonView.swift; sourceTree = "<group>"; };
@@ -151,7 +151,7 @@
 		E11024792901BB4200CBBA90 /* QuickShare2 */ = {
 			isa = PBXGroup;
 			children = (
-				E15B586E2943C0EE0076415D /* GoogleService-Info.plist */,
+				0479E633294422D1007F1DD3 /* GoogleService-Info.plist */,
 				E12227ED2942EE76001301AF /* ThruAlbumButtonView.swift */,
 				0479E62E29426777007F1DD3 /* TestNotification.swift */,
 				0479E62C2942675E007F1DD3 /* TestAlbumView.swift */,
@@ -319,7 +319,7 @@
 			files = (
 				E11024822901BB4400CBBA90 /* Preview Assets.xcassets in Resources */,
 				E110247F2901BB4400CBBA90 /* Assets.xcassets in Resources */,
-				E15B586F2943C0EE0076415D /* GoogleService-Info.plist in Resources */,
+				0479E634294422D1007F1DD3 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
