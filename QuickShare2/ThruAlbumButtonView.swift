@@ -28,7 +28,7 @@ struct AlbumButtonView: View {
                     .foregroundColor(Color.gray)
             }
             HStack {
-                Text(album.symbol)
+//                Text(album.symbol)
                 Text(album.title).foregroundColor(Color.black)
                     .padding(5)
             }.font(.headline)
