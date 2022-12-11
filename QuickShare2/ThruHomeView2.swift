@@ -157,6 +157,10 @@ struct ThruHomeView2: View {
                         }
                         let newAlbum = ThruAlbum(title: p.name, symbol: "", description: "", freq: "", photos: [], albumType: loc)
                         for item in imgs!.items {
+                            if item.name.hasSuffix(".json") {
+                                continue
+                            }
+                            print(item.name)
                             item.downloadURL { (url, err1) in
                                 if err1 != nil {
                                     print((err1?.localizedDescription)!)
