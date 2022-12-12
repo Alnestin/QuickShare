@@ -119,7 +119,6 @@ struct PhotosView: View {
         
         let fileName = "/user1/\(albumType)/\(albumName)/\(stimestamp).jpeg"
         let storageRef = Storage.storage().reference().child(fileName)
-        print(fileUrl)
         storageRef.putFile(from: fileUrl, metadata: nil) { (metadata, error ) in
             guard let error = error else {
                 if error != nil {

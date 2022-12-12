@@ -100,7 +100,7 @@ struct ThruHomeView2: View {
     func uploadAlbumData(album: ThruAlbum) {
         // Put album data into a dictionary
         let dic: [String: Any] = ["id": album.id.uuidString, "title": album.title, "description": album.description,
-                                  "symbol": album.symbol, "freq": album.freq, "type": album.albumType]
+                                  "symbol": album.symbol, "freq": album.freq, "type": album.albumType, "active": 1]
         let fileName = "metadata.json"
         
         do {
@@ -129,11 +129,13 @@ struct ThruHomeView2: View {
     }
     
     func deleteAlbum(album: ThruAlbum) {
-        let fileName = "user1/\(album.albumType)/\(album.title)"
+        // TODO: update the active variable in the json and delete all the images inside.
+        let fileName = "user1/\(album.albumType)/\(album.title)/"
         let storageRef = Storage.storage().reference().child(fileName)
         
-        storageRef.delete {error in
+        storageRef.delete { error in
             if let error = error {
+                print("Error here")
                 print(error.localizedDescription)
             } else {
                 print("Pic deleted")
@@ -144,23 +146,55 @@ struct ThruHomeView2: View {
     func loadImageFromFirebase() {
         for loc in ["ThruTime", "ThruPeople", "ThruDates", "ThruPlaces"] {
             let storageRef = Storage.storage().reference().child("user1/" + loc)
+            
+            // Go through all Thru folders
             storageRef.listAll { (result, error) in
                 if error != nil {
                     print((error?.localizedDescription)!)
                     return
                 }
+                
+                // Go through all albums inside folder
                 for p in result!.prefixes {
+                    
+                    // Go through all images inside album
                     p.listAll{ (imgs , err) in
                         if err != nil {
                             print((err?.localizedDescription)!)
                             return
                         }
-                        let newAlbum = ThruAlbum(title: p.name, symbol: "", description: "", freq: "", photos: [], albumType: loc)
+                        var newAlbum = ThruAlbum(title: p.name, symbol: "", description: "", freq: "", photos: [], albumType: loc)
+                        var albumActive = 1
                         for item in imgs!.items {
+                            if (albumActive == 0) {
+                                break
+                            }
                             if item.name.hasSuffix(".json") {
+                                item.downloadURL { (url, err1) in
+                                    if err1 != nil {
+                                        print((err1?.localizedDescription)!)
+                                        return
+                                    }
+                                    
+                                    do {
+                                        // TODO: fix this, not correctly ignoring albums with active = 0
+                                        let data = try Data(contentsOf: url!, options: .mappedIfSafe)
+                                        let jsonResult = try? JSONSerialization.jsonObject(with: data, options: .mutableLeaves)
+                                        let jsonDict = jsonResult as? [String:Any]
+                                        if (jsonDict!["active"]! as! String == "1") {
+                                            newAlbum.symbol = jsonDict!["symbol"] as! String
+                                            newAlbum.description = jsonDict!["description"] as! String
+                                            newAlbum.freq = jsonDict!["freq"] as! String
+                                        } else {
+                                            albumActive = 0
+                                        }
+                                    } catch {
+                                        print("Error getting json!")
+                                        print(error)
+                                    }
+                                }
                                 continue
                             }
-                            print(item.name)
                             item.downloadURL { (url, err1) in
                                 if err1 != nil {
                                     print((err1?.localizedDescription)!)
@@ -184,19 +218,22 @@ struct ThruHomeView2: View {
                                 }
                             }
                         }
-                        self.albums.append(newAlbum)
+                        // Only append the album if its active
+                        if (albumActive == 1) {
+                            self.albums.append(newAlbum)
+                        }
                     }
                 }
             }
             
-            // This is is you want to download a single image with instead of child you just use reference and the path.
-            storageRef.downloadURL { (url, error) in
-                if error != nil {
-                    print((error?.localizedDescription)!)
-                    return
-                }
-                self.imageURL = url!
-            }
+//            // This is is you want to download a single image with instead of child you just use reference and the path.
+//            storageRef.downloadURL { (url, error) in
+//                if error != nil {
+//                    print((error?.localizedDescription)!)
+//                    return
+//                }
+//                self.imageURL = url!
+//            }
         }
     }
 }
