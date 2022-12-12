@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0438885B29477FE400603F78 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0438885A29477FE400603F78 /* GoogleService-Info.plist */; };
 		0452F8EF291D5F87000B71B9 /* DetailPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0452F8EE291D5F87000B71B9 /* DetailPhotoView.swift */; };
 		0479E629294134FF007F1DD3 /* ThruHomeView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0479E628294134FF007F1DD3 /* ThruHomeView2.swift */; };
 		0479E62D2942675E007F1DD3 /* TestAlbumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0479E62C2942675E007F1DD3 /* TestAlbumView.swift */; };
@@ -31,7 +32,6 @@
 		E15B58822943C1340076415D /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = E15B58812943C1340076415D /* FirebaseStorage */; };
 		E15B58842943C1340076415D /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = E15B58832943C1340076415D /* FirebaseStorageCombine-Community */; };
 		E15B58872943DF800076415D /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = E15B58862943DF800076415D /* SDWebImageSwiftUI */; };
-		E166C2242946DC1F005B6302 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E166C2232946DC1F005B6302 /* GoogleService-Info.plist */; };
 		FC5C46C32901DF46001886C0 /* ThruButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5C46C22901DF46001886C0 /* ThruButton.swift */; };
 		FC5C46C52901E6E3001886C0 /* ThruHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5C46C42901E6E3001886C0 /* ThruHomeView.swift */; };
 		FC5C46C72901E87A001886C0 /* ThruButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5C46C62901E87A001886C0 /* ThruButtonView.swift */; };
@@ -58,6 +58,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0438885A29477FE400603F78 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0452F8EE291D5F87000B71B9 /* DetailPhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPhotoView.swift; sourceTree = "<group>"; };
 		0479E628294134FF007F1DD3 /* ThruHomeView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThruHomeView2.swift; sourceTree = "<group>"; };
 		0479E62C2942675E007F1DD3 /* TestAlbumView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestAlbumView.swift; sourceTree = "<group>"; };
@@ -74,7 +75,6 @@
 		E12227ED2942EE76001301AF /* ThruAlbumButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThruAlbumButtonView.swift; sourceTree = "<group>"; };
 		E128D962291CC7DC002CF414 /* ImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerView.swift; sourceTree = "<group>"; };
 		E14E63BF290312C600A3DAF8 /* PhotosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosView.swift; sourceTree = "<group>"; };
-		E166C2232946DC1F005B6302 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FC5C46C22901DF46001886C0 /* ThruButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThruButton.swift; sourceTree = "<group>"; };
 		FC5C46C42901E6E3001886C0 /* ThruHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThruHomeView.swift; sourceTree = "<group>"; };
 		FC5C46C62901E87A001886C0 /* ThruButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThruButtonView.swift; sourceTree = "<group>"; };
@@ -151,7 +151,7 @@
 		E11024792901BB4200CBBA90 /* QuickShare2 */ = {
 			isa = PBXGroup;
 			children = (
-				E166C2232946DC1F005B6302 /* GoogleService-Info.plist */,
+				0438885A29477FE400603F78 /* GoogleService-Info.plist */,
 				E12227ED2942EE76001301AF /* ThruAlbumButtonView.swift */,
 				0479E62E29426777007F1DD3 /* TestNotification.swift */,
 				0479E62C2942675E007F1DD3 /* TestAlbumView.swift */,
@@ -318,8 +318,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				E11024822901BB4400CBBA90 /* Preview Assets.xcassets in Resources */,
-				E166C2242946DC1F005B6302 /* GoogleService-Info.plist in Resources */,
 				E110247F2901BB4400CBBA90 /* Assets.xcassets in Resources */,
+				0438885B29477FE400603F78 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -516,7 +516,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"QuickShare2/Preview Content\"";
-				DEVELOPMENT_TEAM = 3XNMJ53W93;
+				DEVELOPMENT_TEAM = 83J86G8NVS;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "Need to use the camera to take pictures.";
@@ -549,7 +549,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"QuickShare2/Preview Content\"";
-				DEVELOPMENT_TEAM = 3XNMJ53W93;
+				DEVELOPMENT_TEAM = 83J86G8NVS;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "Need to use the camera to take pictures.";

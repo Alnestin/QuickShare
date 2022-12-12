@@ -39,7 +39,7 @@ extension ThruButton {
     [
         ThruButton(title: "ThruTime", symbol: "clock"),
         ThruButton(title: "ThruPlaces", symbol: "mappin"),
-//        ThruButton(title: "ThruHome", symbol: "house"),
+        ThruButton(title: "Home", symbol: "house"),
         ThruButton(title: "ThruPeople", symbol: "person.3"),
         ThruButton(title: "ThruDates", symbol: "calendar")
     ]

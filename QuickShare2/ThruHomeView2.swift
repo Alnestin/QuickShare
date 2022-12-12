@@ -24,7 +24,7 @@ struct ThruHomeView2: View {
     
     var body: some View {
         TabView(selection: $selectedTab) {
-            ForEach(0..<4) { i in
+            ForEach(0..<5) { i in
                 NavigationStack {
                     ScrollView {
                         LazyVGrid(columns: gridItemLayout, spacing: 20) {
@@ -113,7 +113,7 @@ struct ThruHomeView2: View {
                 .write(to: fileUrl)
             
             // Create the album in the database and put the metadata.
-            let filePath = "/user1/\(album.albumType)/\(album.title)/\(fileName)"
+            let filePath = "/user2/\(album.albumType)/\(album.title)/\(fileName)"
             let storageRef = Storage.storage().reference().child(filePath)
             storageRef.putFile(from: fileUrl, metadata: nil) { (metadata, error ) in
                 guard let error = error else {
@@ -130,7 +130,7 @@ struct ThruHomeView2: View {
     
     func deleteAlbum(album: ThruAlbum) {
         // TODO: update the active variable in the json and delete all the images inside.
-        let fileName = "user1/\(album.albumType)/\(album.title)/"
+        let fileName = "user2/\(album.albumType)/\(album.title)/"
         let storageRef = Storage.storage().reference().child(fileName)
         
         storageRef.delete { error in
@@ -145,7 +145,7 @@ struct ThruHomeView2: View {
     // Loads all the image URLs from firebase and appends them to the imageURLs list.
     func loadImageFromFirebase() {
         for loc in ["ThruTime", "ThruPeople", "ThruDates", "ThruPlaces"] {
-            let storageRef = Storage.storage().reference().child("user1/" + loc)
+            let storageRef = Storage.storage().reference().child("user2/" + loc)
             
             // Go through all Thru folders
             storageRef.listAll { (result, error) in
@@ -184,6 +184,14 @@ struct ThruHomeView2: View {
                                         newAlbum.symbol = jsonDict!["symbol"] as! String
                                         newAlbum.description = jsonDict!["description"] as! String
                                         newAlbum.freq = jsonDict!["freq"] as! String
+                                        newAlbum.title = jsonDict!["title"] as! String
+//                                        for i in 0..<self.albums.count {
+//                                            if newAlbum.title == self.albums[i].title {
+//                                                self.albums[i].symbol = newAlbum.symbol
+//                                                self.albums[i].description = newAlbum.description
+//                                                self.albums[i].freq = newAlbum.freq
+//                                            }
+//                                        }
 //                                        if (jsonDict!["active"]! as! String == "1") {
 //                                            newAlbum.symbol = jsonDict!["symbol"] as! String
 //                                            newAlbum.description = jsonDict!["description"] as! String
@@ -206,6 +214,7 @@ struct ThruHomeView2: View {
                                 }
                                 for i in 0..<self.albums.count {
                                     if newAlbum.title == self.albums[i].title {
+            
                                         self.albums[i].photos.append(url!)
                                         self.albums[i].photos = self.albums[i].photos.sorted( by:{
                                             
@@ -217,7 +226,10 @@ struct ThruHomeView2: View {
                                             
                                             return v1! < v2!
                                         })
-                                        
+//                                        self.albums[i].update(from:newAlbum.data)
+//                                        self.albums[i].symbol = newAlbum.symbol
+//                                        self.albums[i].description = newAlbum.description
+//                                        self.albums[i].freq = newAlbum.freq
                                     }
                                 }
                             }

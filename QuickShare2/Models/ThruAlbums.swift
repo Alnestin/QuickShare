@@ -31,7 +31,7 @@ struct ThruAlbum: Identifiable {
     
     struct Data {
         var symbol: String = ""
-        var title: String = "Untitled"
+        var title: String = ""
         var freq: String = "Never"
         var endDate: Int = 0
         var description: String = ""

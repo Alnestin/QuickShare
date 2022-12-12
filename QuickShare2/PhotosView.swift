@@ -79,7 +79,8 @@ struct PhotosView: View {
             .buttonBorderShape(.capsule)
         }
         
-        .navigationTitle(album.symbol + " " + album.title)
+//        .navigationTitle(album.symbol + " " + album.title)
+        .navigationTitle(album.title)
         .toolbar {
             Button("Edit") {
                 isPresentingEditView = true
@@ -117,7 +118,7 @@ struct PhotosView: View {
         let timestamp = NSDate().timeIntervalSince1970
         let stimestamp = String(timestamp).replacingOccurrences(of: ".", with: "")
         
-        let fileName = "/user1/\(albumType)/\(albumName)/\(stimestamp).jpeg"
+        let fileName = "/user2/\(albumType)/\(albumName)/\(stimestamp).jpeg"
         let storageRef = Storage.storage().reference().child(fileName)
         storageRef.putFile(from: fileUrl, metadata: nil) { (metadata, error ) in
             guard let error = error else {
@@ -130,7 +131,7 @@ struct PhotosView: View {
     }
     
     func deletePicture(fileUrl: URL, albumType: String, albumName: String) {
-        let fileName = "/user1/\(albumType)/\(albumName)/\(fileUrl.lastPathComponent)"
+        let fileName = "/user2/\(albumType)/\(albumName)/\(fileUrl.lastPathComponent)"
         let storageRef = Storage.storage().reference().child(fileName)
         
         storageRef.delete {error in

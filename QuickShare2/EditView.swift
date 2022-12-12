@@ -18,7 +18,7 @@ struct EditView: View {
         Form{
             Section{
                 TextField("Title", text: $data.title).modifier(TextFieldClearButton(text: $data.title)).onReceive(Just(data.title)) { _ in limitTitle(10)}
-                TextField("Symbol", text: $data.symbol).modifier(TextFieldClearButton(text: $data.symbol)).onReceive(Just(data.symbol)) { _ in limitSymbol(1)}
+//                TextField("Symbol", text: $data.symbol).modifier(TextFieldClearButton(text: $data.symbol)).onReceive(Just(data.symbol)) { _ in limitSymbol(1)}
                 Picker("Type", selection: $data.albumType) {
                     ForEach(typeChoices, id: \.self) {
                         Text($0)
