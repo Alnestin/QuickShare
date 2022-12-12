@@ -42,8 +42,10 @@ class Coordinator: NSObject, UINavigationControllerDelegate, UIImagePickerContro
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         guard let selectedImage = info[.originalImage] as? UIImage else { return }
         if (info[UIImagePickerController.InfoKey.imageURL] == nil) {
+            let timestamp = NSDate().timeIntervalSince1970
+            let stimestamp = String(timestamp).replacingOccurrences(of: ".", with: "")
             let jpgData = selectedImage.jpegData(compressionQuality: 1)
-            let path = documentDirectoryPath()?.appendingPathComponent("hello.jpeg")
+            let path = documentDirectoryPath()?.appendingPathComponent("\(stimestamp).jpeg")
             self.picker.imageUrl = path
             do {
                 try jpgData!.write(to: path!)
@@ -51,6 +53,8 @@ class Coordinator: NSObject, UINavigationControllerDelegate, UIImagePickerContro
             } catch {
                 print("Error!")
             }
+        } else {
+            self.picker.imageUrl = info[UIImagePickerController.InfoKey.imageURL] as? URL
         }
             
         self.picker.selectedImage = selectedImage

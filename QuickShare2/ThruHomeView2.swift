@@ -100,7 +100,7 @@ struct ThruHomeView2: View {
     func uploadAlbumData(album: ThruAlbum) {
         // Put album data into a dictionary
         let dic: [String: Any] = ["id": album.id.uuidString, "title": album.title, "description": album.description,
-                                  "symbol": album.symbol, "freq": album.freq, "type": album.albumType, "active": 1]
+                                  "symbol": album.symbol, "freq": album.freq, "type": album.albumType, "active": "1"]
         let fileName = "metadata.json"
         
         do {
@@ -164,11 +164,11 @@ struct ThruHomeView2: View {
                             return
                         }
                         var newAlbum = ThruAlbum(title: p.name, symbol: "", description: "", freq: "", photos: [], albumType: loc)
-                        var albumActive = 1
+//                        var albumActive = 1
                         for item in imgs!.items {
-                            if (albumActive == 0) {
-                                break
-                            }
+//                            if (albumActive == 0) {
+//                                break
+//                            }
                             if item.name.hasSuffix(".json") {
                                 item.downloadURL { (url, err1) in
                                     if err1 != nil {
@@ -181,13 +181,17 @@ struct ThruHomeView2: View {
                                         let data = try Data(contentsOf: url!, options: .mappedIfSafe)
                                         let jsonResult = try? JSONSerialization.jsonObject(with: data, options: .mutableLeaves)
                                         let jsonDict = jsonResult as? [String:Any]
-                                        if (jsonDict!["active"]! as! String == "1") {
-                                            newAlbum.symbol = jsonDict!["symbol"] as! String
-                                            newAlbum.description = jsonDict!["description"] as! String
-                                            newAlbum.freq = jsonDict!["freq"] as! String
-                                        } else {
-                                            albumActive = 0
-                                        }
+                                        newAlbum.symbol = jsonDict!["symbol"] as! String
+                                        newAlbum.description = jsonDict!["description"] as! String
+                                        newAlbum.freq = jsonDict!["freq"] as! String
+//                                        if (jsonDict!["active"]! as! String == "1") {
+//                                            newAlbum.symbol = jsonDict!["symbol"] as! String
+//                                            newAlbum.description = jsonDict!["description"] as! String
+//                                            newAlbum.freq = jsonDict!["freq"] as! String
+//                                            print(newAlbum.symbol)
+//                                        } else {
+//                                            albumActive = 0
+//                                        }
                                     } catch {
                                         print("Error getting json!")
                                         print(error)
@@ -219,9 +223,10 @@ struct ThruHomeView2: View {
                             }
                         }
                         // Only append the album if its active
-                        if (albumActive == 1) {
-                            self.albums.append(newAlbum)
-                        }
+//                        if (albumActive == 1) {
+//                            self.albums.append(newAlbum)
+//                        }
+                        self.albums.append(newAlbum)
                     }
                 }
             }

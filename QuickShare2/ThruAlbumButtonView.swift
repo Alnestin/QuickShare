@@ -10,6 +10,7 @@ import SDWebImageSwiftUI
 
 struct AlbumButtonView: View {
     let album: ThruAlbum
+    
     var body: some View {
         VStack (spacing:10) {
             if let photo = album.photos.first {
@@ -28,14 +29,9 @@ struct AlbumButtonView: View {
                     .foregroundColor(Color.gray)
             }
             HStack {
-//                Text(album.symbol)
-                Text(album.title).foregroundColor(Color.black)
+                Text(album.symbol + " " + album.title).foregroundColor(Color.black)
                     .padding(5)
-            }.font(.headline)
-                
-            
-            
-            
+            }.font(.headline)  
         }
         .background(
             Color.gray
